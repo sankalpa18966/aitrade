@@ -1,0 +1,491 @@
+================================================================
+   FOREX AI TRADING SYSTEM — BUILD GUIDE
+   Fundamental-Driven | Daily Sentiment | Telegram Alerts
+================================================================
+
+ OYAGE SETUP:
+  - VPS: Contabo (~$7/month, Ubuntu 22.04)
+  - AI: Gemini API (Free tier - 1500 calls/day)
+  - Alerts: Telegram Bot
+  - Platform: MT5
+  - Style: Mixed | All Majors | Fundamental First
+
+================================================================
+HOW TO USE THIS GUIDE WITH CLAUDE
+================================================================
+
+Meka Claude eka hand karagena project build karanna
+reference file ekak. Hama step ekedi Claude ta exact
+prompt eka denna. Copy-paste karanna ready.
+
+GOLDEN RULE:
+  - Eka step eka test karagena next step yanna
+  - Error awoth error message Claude ta paste karanna
+  - Blind copy-paste karanna epa - purpose theruma
+
+================================================================
+PROJECT FOLDER STRUCTURE
+================================================================
+
+forex_ai/
+  config.py            <- API keys, settings
+  data_collector.py    <- News + calendar fetch
+  analyzer.py          <- Gemini AI sentiment scoring
+  signal_generator.py  <- Pairs rank + signal format
+  telegram_bot.py      <- Alerts send karanna
+  scheduler.py         <- 6AM, events automate
+  main.py              <- Hama eka run karanna
+
+================================================================
+STEP 1 — ACCOUNTS SETUP (Day 1, ~1 hour)
+================================================================
+
+STEP 1A: Gemini API Key
+------------------------
+1. aistudio.google.com yanna
+2. Google account login
+3. "Get API Key" click
+4. "Create API key in new project" click
+5. Key copy karagena safe place save karanna
+   (credit card onni na - free)
+
+STEP 1B: Telegram Bot
+----------------------
+1. Telegram open karanna
+2. Search: @BotFather
+3. Type: /newbot
+4. Bot name denna (example: MyForexAI_Bot)
+5. Token copy karanna (example: 110201543:AAHdqTcvCH...)
+
+STEP 1C: Get Your Telegram Chat ID
+------------------------------------
+1. Telegram search: @userinfobot
+2. /start type karanna
+3. "Id" number copy karanna (example: 123456789)
+
+STEP 1D: VPS Order
+-------------------
+1. contabo.com yanna
+2. "Cloud VPS" -> VPS S plan ($7) select
+3. Location: European (Germany best)
+4. OS: Ubuntu 22.04
+5. Visa/Mastercard debit card pay
+6. Credentials email ekka enavaa (24h athulath)
+
+================================================================
+STEP 2 — VPS CONNECT & SETUP (Day 2, ~2 hours)
+================================================================
+
+STEP 2A: Connect to VPS
+------------------------
+Windows PC:
+1. Start -> "Remote Desktop Connection" open
+2. Computer: [VPS IP address]
+3. Username + Password enter (email ekken awaa)
+4. Ubuntu terminal open wevaa
+
+STEP 2B: Claude Prompt - Python Setup
+---------------------------------------
+Claude ta denna mee prompt eka:
+
+"I have a fresh Ubuntu 22.04 VPS. I need to set it up
+for a Python 3.11 project. Give me the exact terminal
+commands to:
+1. Update the system
+2. Install Python 3.11 and pip
+3. Create a virtual environment called forex_ai
+4. Install these packages: requests, schedule,
+   google-generativeai, python-telegram-bot, feedparser
+5. Verify everything installed correctly
+Give me commands one by one with explanation."
+
+TEST: Python --version print wenawaada confirm.
+
+================================================================
+STEP 3 — CONFIG FILE (Day 2, 30 min)
+================================================================
+
+Claude Prompt:
+--------------
+"Create a config.py file for my Forex AI project.
+It should store:
+- GEMINI_API_KEY = 'paste_your_key_here'
+- TELEGRAM_TOKEN = 'paste_your_token_here'
+- TELEGRAM_CHAT_ID = 'paste_your_chat_id_here'
+- FOREX_PAIRS = ['EUR/USD', 'GBP/USD', 'USD/JPY',
+                  'AUD/USD', 'USD/CAD', 'NZD/USD',
+                  'USD/CHF', 'GBP/JPY']
+- MORNING_BRIEF_TIME = '06:00'
+- EVENING_SUMMARY_TIME = '18:00'
+- PRE_EVENT_ALERT_MINUTES = 15
+- MAX_SIGNALS_PER_DAY = 5
+Make it clean and well commented."
+
+Oyage actual API keys paste karanna placeholder wenuwen.
+
+TEST: Python -c 'import config; print(config.GEMINI_API_KEY)'
+      Error na wenawaada confirm.
+
+================================================================
+STEP 4 — TELEGRAM BOT (Day 2, 30 min)
+================================================================
+
+Claude Prompt:
+--------------
+"Create a telegram_bot.py file for my Forex AI project.
+It should have:
+- A send_message(text) function using python-telegram-bot
+- A send_alert(title, message) function with emoji formatting
+- Import API token and chat_id from config.py
+- Basic error handling if message fails
+Keep it simple - just sending messages for now."
+
+TEST Claude Prompt:
+-------------------
+"Write a quick test script to send 'Hello from Forex AI!'
+to my Telegram using the telegram_bot.py we just created."
+
+Phone Telegram ekata message enawada CONFIRM karanna.
+Meka work karanna naththam next step yanna epa.
+
+================================================================
+STEP 5 — DATA COLLECTOR (Day 3, ~2 hours)
+================================================================
+
+Claude Prompt:
+--------------
+"Create a data_collector.py file for my Forex AI system.
+It should collect fundamental data from FREE sources:
+
+1. ForexFactory economic calendar - today and tomorrow's
+   HIGH impact events with: time, currency, event name,
+   forecast, previous values
+
+2. Reuters RSS feed - latest 10 financial headlines
+   (https://feeds.reuters.com/reuters/businessNews)
+
+3. Investing.com RSS - forex news headlines
+
+4. FRED API - latest USD data (I'll add API key later)
+
+Return everything as a clean dictionary with:
+- events: list of calendar events
+- headlines: list of news items with title + summary
+- timestamp: when data was collected
+
+Use requests and feedparser libraries.
+Add error handling - if one source fails, continue with others.
+Print a summary at the end."
+
+TEST Claude Prompt:
+-------------------
+"Write a test to run data_collector.py and print:
+- How many calendar events found
+- How many headlines found
+- First 3 headlines as a preview"
+
+Minimum 5+ news items fetch wenawaada confirm.
+
+================================================================
+STEP 6 — GEMINI ANALYZER (Day 4, ~2 hours)
+================================================================
+
+Claude Prompt:
+--------------
+"Create an analyzer.py file for my Forex AI system.
+It should:
+
+1. Take the data from data_collector.py as input
+
+2. Call Gemini API (google-generativeai library) with
+   this analysis task:
+   - Analyze sentiment for 8 major currencies:
+     USD, EUR, GBP, JPY, AUD, CAD, NZD, CHF
+   - Score each currency: -5 (very bearish) to +5 (very bullish)
+   - Identify top 3 key fundamental drivers today
+   - Classify overall market mood: risk-on/risk-off/neutral
+   - Flag any high-impact events in next 24 hours
+
+3. Return structured results as a dictionary with:
+   - currency_scores: {USD: 3.2, EUR: -1.8, ...}
+   - drivers: ['Fed hawkish tone', 'EU PMI miss', ...]
+   - market_mood: 'risk-off'
+   - upcoming_events: [...]
+   - confidence: 65 (percentage)
+
+Use config.py for the API key.
+Model to use: gemini-1.5-flash (free tier)
+Add retry logic if API call fails."
+
+TEST Claude Prompt:
+-------------------
+"Write a test for analyzer.py that:
+1. Loads sample data (create dummy data if needed)
+2. Runs the analysis
+3. Prints currency scores in a readable format
+4. Prints the top drivers"
+
+Manually verify: USD hawkish news thibboth USD score
+positive wenawaada logic check karanna.
+
+================================================================
+STEP 7 — SIGNAL GENERATOR (Day 4, ~1 hour)
+================================================================
+
+Claude Prompt:
+--------------
+"Create a signal_generator.py for my Forex AI system.
+It should:
+
+1. Take currency_scores from analyzer.py
+
+2. Rank all 8 currencies strongest to weakest
+
+3. Find top 3 trade opportunities by pairing:
+   - Strongest currency vs Weakest currency
+   - Only major pairs (from config.py FOREX_PAIRS)
+
+4. For each signal provide:
+   - Pair name (e.g., EUR/USD)
+   - Direction (BUY strongest / SELL weakest)
+   - Fundamental bias score
+   - Key drivers (2-3 points)
+   - Confidence percentage
+   - Note: 'Wait for price action confirmation at S/R'
+
+5. Format a clean Telegram message like this:
+
+=== DAILY FOREX BRIEF ===
+Date: [date] | [market mood]
+
+CURRENCY STRENGTH RANKING:
+1. USD +3.2 (Bullish)
+2. GBP +1.5 (Mild Bull)
+...
+8. EUR -2.8 (Bearish)
+
+TOP SETUPS:
+1. GBP/EUR - BUY BIAS
+   Fundamental Score: 6.0/10
+   Drivers: [list]
+   Confidence: 72%
+   Action: Wait PA confirmation
+
+HIGH IMPACT TODAY:
+[event list]
+
+Do NOT include specific entry/SL/TP prices -
+trader confirms on chart manually."
+
+TEST: Print generated message, logic manually verify karanna.
+
+================================================================
+STEP 8 — MAIN PIPELINE (Day 5, ~1 hour)
+================================================================
+
+Claude Prompt:
+--------------
+"Create main.py that runs the complete Forex AI pipeline:
+
+1. Import all modules (data_collector, analyzer,
+   signal_generator, telegram_bot, config)
+
+2. Create a function run_daily_brief() that:
+   - Prints 'Starting daily brief...'
+   - Collects data (data_collector)
+   - Analyzes sentiment (analyzer)
+   - Generates signals (signal_generator)
+   - Sends Telegram message (telegram_bot)
+   - Prints 'Brief sent successfully!'
+   - Logs any errors to errors.log file
+
+3. Run the function once when script starts
+
+Add proper error handling throughout."
+
+TEST: python main.py run karanna.
+Phone Telegram ekata complete daily brief enawada confirm.
+Meka work karanna naththam NEXT STEP YANNA EPA.
+
+================================================================
+STEP 9 — SCHEDULER (Day 5, ~1 hour)
+================================================================
+
+Claude Prompt:
+--------------
+"Update scheduler.py to automate the Forex AI system:
+
+1. Daily brief: Run run_daily_brief() every day at 06:00 AM
+
+2. Pre-event alerts: Check economic calendar every 30 min,
+   if HIGH impact event is within 15 minutes, send alert:
+   '⚠️ EVENT ALERT: [event] in 15 min - [currency] [forecast]'
+
+3. Evening summary: Run light summary at 18:00 with
+   today's key events recap
+
+4. Keep-alive: Every hour send a log message (not Telegram)
+   to confirm system is running
+
+5. Run forever with while True loop
+
+Use the 'schedule' library."
+
+VPS Auto-Start Claude Prompt:
+------------------------------
+"How do I make scheduler.py run automatically when my
+Ubuntu VPS reboots? Give me the exact commands to set
+this up using crontab or systemd service."
+
+TEST: Test schedule set karanna 3 min later.
+Alert phone ekata enawada confirm.
+
+================================================================
+STEP 10 — PAPER TRADING WEEK (Day 6-14)
+================================================================
+
+Real money na. Signals observe karanna.
+
+Hama udema:
+  1. Telegram brief read karanna (5 min)
+  2. MT5 open karanna
+  3. AI signal bullish/bearish currency pair
+     chart ekata gihilla PA confirm wenawaada banna
+  4. Journal ekata note karanna:
+     - Signal: EUR/USD SELL
+     - AI Confidence: 72%
+     - PA confirmed?: Yes/No
+     - Would you trade?: Yes/No
+     - Result (next day): +/- pips
+
+Target: 70%+ signals correct direction.
+Satisfied naththam analyzer.py prompt tune karanna.
+
+================================================================
+STEP 11 — LIVE USE (Week 3+)
+================================================================
+
+Paper trade satisfied nam live start.
+
+Rules:
+  - First month: 0.01 lot only (smallest size)
+  - AI signal + PA confirm = BOTH eka dunnam trade
+  - AI signal only (no PA) = SKIP
+  - PA only (no AI) = oya decide (oya experience use)
+  - Max 2% account risk per trade
+  - Daily 5% loss limit hit wunoth trading stop
+
+================================================================
+COMMON ERRORS & FIXES
+================================================================
+
+ERROR: "ModuleNotFoundError"
+FIX: pip install [module name]
+
+ERROR: "API key invalid"
+FIX: config.py eke key correct paste wenawada check
+
+ERROR: "Telegram message not sent"
+FIX: Chat ID correct wenawada check. @userinfobot again run
+
+ERROR: "No data from ForexFactory"
+FIX: Website structure change wela thibenna puluwan.
+     Claude ta error paste karanna - fix karadevi
+
+ERROR: "Gemini quota exceeded"
+FIX: Free tier 15 calls/minute limit. Schedule eke
+     wait time increase karanna.
+
+================================================================
+HOW TO ASK CLAUDE FOR HELP — TEMPLATE
+================================================================
+
+Error fix karanna:
+------------------
+"My Forex AI project has an error. Here is the error:
+[paste full error message]
+Here is my current code:
+[paste relevant code]
+Please fix it and explain what was wrong."
+
+New feature add karanna:
+------------------------
+"My Forex AI system currently does [X].
+I want to add [specific feature].
+Current file: [filename]
+Current code: [paste code]
+Please update it."
+
+Something not working:
+-----------------------
+"My [filename] is not working correctly.
+Expected: [what should happen]
+Actual: [what is happening]
+Code: [paste code]
+Help me debug this."
+
+================================================================
+TOTAL COST SUMMARY
+================================================================
+
+  VPS Contabo (4GB RAM):    ~$7/month
+  Gemini API (free tier):    $0/month
+  Telegram Bot:              $0/month
+  Data Sources (RSS/FRED):   $0/month
+  ----------------------------------------
+  TOTAL:                    ~$7/month
+
+================================================================
+QUICK REFERENCE — WHAT EACH FILE DOES
+================================================================
+
+config.py
+  Stores all settings and API keys.
+  Change settings here - other files read from here.
+
+data_collector.py
+  Fetches raw data from internet.
+  ForexFactory + Reuters + RSS feeds.
+  Output: raw news + events dictionary.
+
+analyzer.py
+  Takes raw data, sends to Gemini AI.
+  Gemini analyzes sentiment per currency.
+  Output: currency scores + drivers + mood.
+
+signal_generator.py
+  Takes currency scores.
+  Ranks strongest vs weakest.
+  Builds formatted Telegram message.
+  Output: ready-to-send signal message.
+
+telegram_bot.py
+  Simple: takes message, sends to your phone.
+  Nothing else.
+
+scheduler.py
+  Runs everything automatically at right times.
+  6AM brief, 15min pre-event, 6PM summary.
+  Runs 24/7 on VPS.
+
+main.py
+  Master file. Calls all others in sequence.
+  Run this to test full pipeline manually.
+
+================================================================
+REMEMBER
+================================================================
+
+  1. AI signal = BIAS only. Not guaranteed.
+  2. Always confirm on chart before entering.
+  3. Your 3 years experience > AI alone.
+  4. Never skip Stop Loss.
+  5. Paper trade minimum 1 week before live.
+  6. Error awoth panic na - Claude ta denna.
+
+================================================================
+START HERE TODAY:
+  Step 1: aistudio.google.com -> Gemini API key
+  Step 2: Telegram @BotFather -> Bot create
+  Step 3: contabo.com -> VPS order
+================================================================
