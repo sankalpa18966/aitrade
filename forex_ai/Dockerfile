@@ -1,16 +1,32 @@
-FROM python:3.10-slim
+# Use an official lightweight Python image
+FROM python:3.14.0a4-slim
 
-# Set the working directory in the container
+# Set environment variables to prevent Python from writing .pyc files
+# and to ensure stdout and stderr are unbuffered so logs work correctly
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+# Set timezone to UTC
+ENV TZ=UTC
+
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy requirements file first to leverage Docker cache
-COPY requirements.txt .
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
+# Copy requirements.txt and install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
+# Copy the entire project code into the container
 COPY . .
 
-# Run the application
+# Ensure trades.db is persisted by using a volume in docker-compose,
+# but we just need to ensure the script runs.
+# The entrypoint runs the scheduler loop indefinitely.
 CMD ["python", "scheduler.py"]

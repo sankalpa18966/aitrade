@@ -1,11 +1,13 @@
 version: '3.8'
 
 services:
-  forex_ai:
+  trading-bot:
     build: .
-    container_name: forex_ai_bot
+    container_name: bandafx-ai-bot
     restart: unless-stopped
-    # Uncomment the following lines if you want to keep the logs and news cache persistent on your host machine
-    # volumes:
-    #   - ./seen_news.json:/app/seen_news.json
-    #   - ./errors.log:/app/errors.log
+    volumes:
+      # Mount the trades.db file to host so DB doesn't reset when container restarts
+      - ./trades.db:/app/trades.db
+      - ./errors.log:/app/errors.log
+    environment:
+      - TZ=UTC
