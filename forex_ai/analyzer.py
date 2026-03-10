@@ -34,38 +34,40 @@ def analyze_daily_sentiment(data: dict) -> dict:
     headlines = data.get("headlines", [])
     events    = data.get("calendar_events", [])
 
-    # Prompt build
+    # Prompt build - Pass less headlines to save tokens
     headlines_text = "\n".join(
-        [f"- [{h['source']}] {h['title']}" for h in headlines[:20]]
+        [f"- [{h['source']}] {h['title']}" for h in headlines[:15]]
     )
     events_text = "\n".join(
         [
             f"- {e['time']} | {e['currency']} | {e['event']} "
             f"| F:{e['forecast']} P:{e['previous']} A:{e['actual']}"
-            for e in events[:15]
+            for e in events[:10]
         ]
     )
 
-    prompt = f"""You are a professional forex market analyst. Analyze the following financial news and economic calendar data.
+    prompt = f"""You are a quantitative forex strategy analyst. Extract the general daily bias for these currencies from the news.
+    Do not hallucinate. If there's no clear news for a currency, default its score to 0.
 
 RECENT HEADLINES:
 {headlines_text if headlines_text else "No headlines available."}
 
-ECONOMIC CALENDAR (Today + Tomorrow, High/Medium Impact):
+ECONOMIC CALENDAR:
 {events_text if events_text else "No scheduled events."}
 
-Based on this data, provide your analysis in the following EXACT JSON format (no markdown, pure JSON):
+Based on this data, provide your analysis in the following EXACT JSON format:
 {{
   "currency_scores": {{
-    "USD": 2.5,
-    "EUR": -1.8,
-    "GBP": 0.5,
-    "JPY": -2.0,
-    "AUD": 1.0,
-    "CAD": 0.3,
+    "USD": 3.0,
+    "EUR": -2.0,
+    "GBP": 1.0,
+    "JPY": -1.0,
+    "AUD": 0.5,
+    "CAD": 0.0,
     "NZD": -0.5,
-    "CHF": -1.2
+    "CHF": 0.0
   }},
+
   "drivers": [
     "Fed hawkish tone supports USD",
     "EU PMI miss pressures EUR",

@@ -12,6 +12,7 @@ import schedule
 
 import config
 import main as pipeline
+import tracker
 
 # ── Logging ───────────────────────────────────────────────────────
 logging.basicConfig(
@@ -37,6 +38,12 @@ def job_evening_summary():
     pipeline.run_evening_summary()
 
 
+def job_intraday_smc_scan():
+    """Every 4 hours — hunt for new setups."""
+    logger.info("⏰ Scheduled: Intraday SMC Scan")
+    pipeline.run_intraday_scan()
+
+
 def job_breaking_news_check():
     """Every 5 min — breaking news RSS check."""
     count = pipeline.check_breaking_news()
@@ -50,6 +57,10 @@ def job_economic_surprise_check():
     if count:
         logger.info(f"Economic surprise: {count} alert(s) sent")
 
+def job_update_tracker():
+    """Every 30 mins — check pending/active trades."""
+    logger.info("🔄 Checking pending/active SMC trades...")
+    tracker.update_pending_and_active_trades()
 
 def job_keepalive():
     """Hourly heartbeat — just log, no Telegram."""
@@ -66,9 +77,15 @@ def setup_schedules():
     schedule.every().day.at(config.MORNING_BRIEF_TIME).do(job_morning_brief)
     schedule.every().day.at(config.EVENING_SUMMARY_TIME).do(job_evening_summary)
 
-    # ── Breaking news + economic surprise (every 5 min) ──────────
-    schedule.every(config.NEWS_CHECK_INTERVAL_MIN).minutes.do(job_breaking_news_check)
+    # ── Intraday SMC Scanner (Every 4 hours) ─────────────────────
+    schedule.every(4).hours.do(job_intraday_smc_scan)
+
+    # ── Breaking news + economic surprise ──────────
+    schedule.every(2).hours.do(job_breaking_news_check)
     schedule.every(config.NEWS_CHECK_INTERVAL_MIN).minutes.do(job_economic_surprise_check)
+
+    # ── Background tracker check ─────────────────────────────────
+    schedule.every(30).minutes.do(job_update_tracker)
 
     # ── Hourly keep-alive ────────────────────────────────────────
     schedule.every().hour.do(job_keepalive)

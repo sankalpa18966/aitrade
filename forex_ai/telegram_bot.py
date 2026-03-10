@@ -133,3 +133,43 @@ def send_economic_surprise_alert(event: dict, analysis: dict) -> bool:
         f"⚠️  Always confirm PA on chart first!"
     )
     return send_message(msg)
+
+def send_smc_signal(signal: dict) -> bool:
+    """
+    SMC engine eken ena exact entry signals yavanna.
+    Includes DB Stats and AI Quality Score.
+    """
+    pair = signal.get("pair")
+    direction = signal.get("direction")
+    entry = signal.get("entry")
+    sl = signal.get("sl")
+    tp = signal.get("tp")
+    rr = signal.get("risk_reward")
+    entry_type = str(signal.get("entry_type")).replace(" (OB)", "").replace(" (FVG)", "")
+    
+    ai_score = signal.get("ai_quality_score", "N/A")
+    ai_reason = signal.get("ai_reasoning", "")
+    
+    # Get DB Win Rate
+    import tracker
+    stats = tracker.get_win_rate_stats()
+    wr = stats.get("win_rate", 0)
+    wins = stats.get("wins", 0)
+    losses = stats.get("losses", 0)
+    
+    msg = (
+        f"🤖 <b>BandaFX AI — HEDGE FUND SIGNAL</b>\n"
+        f"━━━━━━━━━━━━━━━━━━\n"
+        f"<b>{pair}</b> | <b>{direction}</b>\n"
+        f"Setup: {entry_type}\n\n"
+        f"🎯 <b>Entry (Limit):</b> {entry}\n"
+        f"🛑 <b>Stop Loss:</b>   {sl}\n"
+        f"💰 <b>Take Profit:</b> {tp}\n\n"
+        f"⚖️ <b>Risk/Reward:</b> 1:{rr}\n"
+        f"🧠 <b>AI Rating:</b>    {ai_score}/10\n"
+        f"📝 <b>Reasoning:</b>    {ai_reason}\n"
+        f"━━━━━━━━━━━━━━━━━━\n"
+        f"📊 <b>System Win Rate:</b> {wr}% ({wins}W / {losses}L)\n"
+        f"⚠️ <i>Orders expire automatically after 24h.</i>"
+    )
+    return send_message(msg)

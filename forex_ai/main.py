@@ -139,6 +139,10 @@ def check_breaking_news() -> int:
         if ok:
             sent += 1
             logger.info(f"Breaking news alert sent: {title[:60]}")
+            
+            # Hedge Fund trick: Immediately trigger an intraday scan if big news hits
+            logger.info("Big news hit! Triggering immediate SMC intraday scan...")
+            run_intraday_scan()
 
     return sent
 
@@ -173,6 +177,64 @@ def check_economic_surprises() -> int:
             logger.info(f"Surprise alert sent: {ev['event']}")
 
     return sent
+
+
+# ── INTRADAY SMC SCANNER (PREMIUM) ────────────────────────────────
+
+def run_intraday_scan():
+    """
+    Day time eke continuous market eka scan karala, morning eke miss wunu 
+    hoda FVG/OB entries allanna. (Uses allowed AI calls).
+    """
+    logger.info("=" * 50)
+    logger.info("INTRADAY SMC SCAN STARTING")
+    logger.info("=" * 50)
+
+    # 1. Very light news scan to check if bias changed
+    data = data_collector.collect_daily_data()
+    analysis = analyzer.analyze_daily_sentiment(data)
+    if not analysis:
+        logger.error("Analysis failed during intraday scan.")
+        return
+
+    currency_scores = analysis.get("currency_scores", {})
+    pairs = config.CURRENCY_PAIRS
+
+    new_signals_found = 0
+
+    for idx, pair in enumerate(pairs):
+        base, quote = pair.split("/")
+        base_score = currency_scores.get(base, 0)
+        quote_score = currency_scores.get(quote, 0)
+        diff = base_score - quote_score
+
+        # Determine AI directional bias
+        ai_direction = "NEUTRAL"
+        if diff >= 1.5:   ai_direction = "BUY"
+        elif diff <= -1.5: ai_direction = "SELL"
+        
+        if ai_direction == "NEUTRAL":
+            continue
+            
+        logger.info(f"[{pair}] Intraday AI Bias: {ai_direction} (Diff: {diff:.1f})")
+
+        # Get exact entry from SMC Engine
+        signal = signal_generator.generate_smc_signal(pair, ai_direction)
+        
+        if signal:
+            import tracker
+            if tracker.has_open_trade(pair):
+                logger.info(f"[{pair}] Skipping Intraday setup — trade already active.")
+                continue
+            
+            # Send immediately!
+            telegram_bot.send_smc_signal(signal)
+            new_signals_found += 1
+        
+        # small delay
+        time.sleep(2)
+
+    logger.info(f"Intraday scan complete. {new_signals_found} new setups found.")
 
 
 # ── MAIN ENTRY ────────────────────────────────────────────────────
