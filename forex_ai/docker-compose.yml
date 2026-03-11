@@ -1,4 +1,3 @@
-
 services:
   trading-bot:
     build: .
@@ -6,6 +5,8 @@ services:
     restart: unless-stopped
     volumes:
       # Mount the trades.db file to host so DB doesn't reset when container restarts
+      # Note: Make sure trades.db and errors.log files exist before running docker-compose up
+      # e.g touch trades.db && touch errors.log
       - ./trades.db:/app/trades.db
       - ./errors.log:/app/errors.log
     environment:
