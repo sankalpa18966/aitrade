@@ -291,15 +291,10 @@ Return your response in exact JSON:
   "reasoning": "Strong fundamentally backed direction aligning with a clean 1H FVG."
 }}"""
         
-        evaluation = analyzer._call_llm(prompt) # Assuming we can call the groq/azure model directly
-        
         try:
-            import json
-            import re
-            
-            # Clean JSON
-            clean_json = re.sub(r'```json\s*|\s*```', '', evaluation).strip()
-            result = json.loads(clean_json)
+            result = analyzer._call_ai_with_retry(prompt, expected_key="quality_score")
+            if not result:
+                raise ValueError("AI analysis returned empty result")
             
             score = result.get("quality_score", 0)
             reason = result.get("reasoning", "No reason provided")
