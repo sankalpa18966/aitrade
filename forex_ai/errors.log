@@ -1,0 +1,273 @@
+2026-03-11 18:46:20,621 [INFO] __main__ — ==================================================
+2026-03-11 18:46:20,621 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-11 18:46:20,622 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-11 18:46:20,622 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-11 18:46:20,622 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-11 18:46:20,622 [INFO] __main__ — ==================================================
+2026-03-11 18:46:20,622 [INFO] __main__ — Running initial brief on startup...
+2026-03-11 18:46:20,622 [INFO] main — ==================================================
+2026-03-11 18:46:20,623 [INFO] main — DAILY BRIEF STARTING
+2026-03-11 18:46:20,623 [INFO] main — ==================================================
+2026-03-11 18:46:21,975 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-11 18:46:22,127 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-11 18:46:24,876 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-11 18:46:26,011 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-11 18:46:28,775 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-11 18:46:31,975 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-11 18:46:33,999 [INFO] data_collector — ForexFactory → 6 HIGH/MEDIUM events
+2026-03-11 18:46:34,001 [INFO] main — Data collected: 24 headlines, 6 events
+2026-03-11 18:46:39,474 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-11 18:46:39,488 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-11 18:46:39,488 [INFO] main — Analysis OK — Mood: neutral | Confidence: 65%
+2026-03-11 18:46:39,488 [INFO] signal_generator — Checking SMC for USD/CHF (BUY)
+2026-03-11 18:46:45,044 [INFO] signal_generator — Checking SMC for NZD/USD (SELL)
+2026-03-11 18:46:48,624 [INFO] signal_generator — Checking SMC for USD/CAD (BUY)
+2026-03-11 18:46:52,624 [INFO] signal_generator — Checking SMC for AUD/USD (SELL)
+2026-03-11 18:46:54,932 [INFO] smc_engine — [AUD/USD] Math SMC setup found. Asking AI to evaluate the Trade Quality...
+2026-03-11 18:46:54,933 [ERROR] main — run_daily_brief exception: module 'analyzer' has no attribute '_call_llm'
+Traceback (most recent call last):
+  File "D:\software\aitrade\forex_ai\main.py", line 59, in run_daily_brief
+    brief_message = signal_generator.format_daily_brief(analysis, currency_scores)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 107, in format_daily_brief
+    signals = find_top_signals(ranked)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 84, in find_top_signals
+    sig = smc_engine.generate_pinpoint_signal(pair_b, "SELL", current_price)
+  File "D:\software\aitrade\forex_ai\smc_engine.py", line 294, in generate_pinpoint_signal
+    evaluation = analyzer._call_llm(prompt) # Assuming we can call the groq/azure model directly
+                 ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'analyzer' has no attribute '_call_llm'
+2026-03-11 18:46:57,819 [INFO] telegram_bot — Telegram message sent OK
+2026-03-11 18:46:57,821 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-11 18:48:45,751 [INFO] __main__ — Scheduler stopped by user.
+2026-03-11 18:48:52,656 [INFO] __main__ — ==================================================
+2026-03-11 18:48:52,657 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-11 18:48:52,657 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-11 18:48:52,657 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-11 18:48:52,657 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-11 18:48:52,657 [INFO] __main__ — ==================================================
+2026-03-11 18:48:52,658 [INFO] __main__ — Running initial brief on startup...
+2026-03-11 18:48:52,658 [INFO] main — ==================================================
+2026-03-11 18:48:52,658 [INFO] main — DAILY BRIEF STARTING
+2026-03-11 18:48:52,658 [INFO] main — ==================================================
+2026-03-11 18:48:53,410 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-11 18:48:53,453 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-11 18:48:54,917 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-11 18:48:55,508 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-11 18:48:57,097 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-11 18:48:58,844 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-11 18:48:59,944 [INFO] data_collector — ForexFactory → 6 HIGH/MEDIUM events
+2026-03-11 18:48:59,948 [INFO] main — Data collected: 24 headlines, 6 events
+2026-03-11 18:49:05,321 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-11 18:49:05,333 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-11 18:49:05,334 [INFO] main — Analysis OK — Mood: neutral | Confidence: 75%
+2026-03-11 18:49:05,334 [INFO] signal_generator — Checking SMC for USD/CHF (BUY)
+2026-03-11 18:49:08,329 [INFO] signal_generator — Checking SMC for NZD/USD (SELL)
+2026-03-11 18:49:11,385 [INFO] signal_generator — Checking SMC for USD/CAD (BUY)
+2026-03-11 18:49:15,732 [INFO] signal_generator — Checking SMC for AUD/USD (SELL)
+2026-03-11 18:49:18,852 [INFO] smc_engine — [AUD/USD] Math SMC setup found. Asking AI to evaluate the Trade Quality...
+2026-03-11 18:49:18,853 [ERROR] main — run_daily_brief exception: module 'analyzer' has no attribute '_call_llm'
+Traceback (most recent call last):
+  File "D:\software\aitrade\forex_ai\main.py", line 59, in run_daily_brief
+    brief_message = signal_generator.format_daily_brief(analysis, currency_scores)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 107, in format_daily_brief
+    signals = find_top_signals(ranked)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 84, in find_top_signals
+    sig = smc_engine.generate_pinpoint_signal(pair_b, "SELL", current_price)
+  File "D:\software\aitrade\forex_ai\smc_engine.py", line 294, in generate_pinpoint_signal
+    evaluation = analyzer._call_llm(prompt) # Assuming we can call the groq/azure model directly
+                 ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'analyzer' has no attribute '_call_llm'
+2026-03-11 18:49:21,155 [INFO] telegram_bot — Telegram message sent OK
+2026-03-11 18:49:21,157 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-11 18:49:22,949 [INFO] __main__ — Scheduler stopped by user.
+2026-03-11 18:49:40,876 [INFO] __main__ — ==================================================
+2026-03-11 18:49:40,876 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-11 18:49:40,876 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-11 18:49:40,877 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-11 18:49:40,877 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-11 18:49:40,877 [INFO] __main__ — ==================================================
+2026-03-11 18:49:40,877 [INFO] __main__ — Running initial brief on startup...
+2026-03-11 18:49:40,878 [INFO] main — ==================================================
+2026-03-11 18:49:40,878 [INFO] main — DAILY BRIEF STARTING
+2026-03-11 18:49:40,878 [INFO] main — ==================================================
+2026-03-11 18:49:41,445 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-11 18:49:41,477 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-11 18:49:43,303 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-11 18:49:43,793 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-11 18:49:45,056 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-11 18:49:47,155 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-11 18:49:48,376 [ERROR] data_collector — ForexFactory fetch error: 429 Client Error: Too Many Requests for url: https://nfs.faireconomy.media/ff_calendar_thisweek.json
+2026-03-11 18:49:48,378 [INFO] main — Data collected: 24 headlines, 0 events
+2026-03-11 18:49:53,751 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-11 18:49:53,765 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-11 18:49:53,766 [INFO] main — Analysis OK — Mood: risk-off | Confidence: 60%
+2026-03-11 18:49:53,766 [INFO] signal_generator — Checking SMC for USD/CHF (BUY)
+2026-03-11 18:49:56,586 [INFO] signal_generator — Checking SMC for NZD/USD (SELL)
+2026-03-11 18:49:59,256 [INFO] signal_generator — Checking SMC for USD/CAD (BUY)
+2026-03-11 18:50:01,942 [INFO] signal_generator — Checking SMC for AUD/USD (SELL)
+2026-03-11 18:50:03,510 [INFO] smc_engine — [AUD/USD] Math SMC setup found. Asking AI to evaluate the Trade Quality...
+2026-03-11 18:50:03,511 [ERROR] main — run_daily_brief exception: module 'analyzer' has no attribute '_call_llm'
+Traceback (most recent call last):
+  File "D:\software\aitrade\forex_ai\main.py", line 59, in run_daily_brief
+    brief_message = signal_generator.format_daily_brief(analysis, currency_scores)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 107, in format_daily_brief
+    signals = find_top_signals(ranked)
+  File "D:\software\aitrade\forex_ai\signal_generator.py", line 84, in find_top_signals
+    sig = smc_engine.generate_pinpoint_signal(pair_b, "SELL", current_price)
+  File "D:\software\aitrade\forex_ai\smc_engine.py", line 294, in generate_pinpoint_signal
+    evaluation = analyzer._call_llm(prompt) # Assuming we can call the groq/azure model directly
+                 ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'analyzer' has no attribute '_call_llm'
+2026-03-11 18:50:05,605 [INFO] telegram_bot — Telegram message sent OK
+2026-03-11 18:50:05,607 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-11 18:50:19,925 [INFO] __main__ — Scheduler stopped by user.
+2026-03-11 18:54:42,278 [INFO] __main__ — ==================================================
+2026-03-11 18:54:42,279 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-11 18:54:42,279 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-11 18:54:42,279 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-11 18:54:42,280 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-11 18:54:42,280 [INFO] __main__ — ==================================================
+2026-03-11 18:54:42,280 [INFO] __main__ — Running initial brief on startup...
+2026-03-11 18:54:42,280 [INFO] main — ==================================================
+2026-03-11 18:54:42,281 [INFO] main — DAILY BRIEF STARTING
+2026-03-11 18:54:42,281 [INFO] main — ==================================================
+2026-03-11 18:54:42,982 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-11 18:54:43,397 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-11 18:54:45,385 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-11 18:54:46,342 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-11 18:54:47,707 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-11 18:54:50,216 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-11 18:54:51,231 [INFO] data_collector — ForexFactory → 6 HIGH/MEDIUM events
+2026-03-11 18:54:51,234 [INFO] main — Data collected: 24 headlines, 6 events
+2026-03-11 18:54:56,438 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-11 18:54:56,456 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-11 18:54:56,457 [INFO] main — Analysis OK — Mood: neutral | Confidence: 70%
+2026-03-11 18:54:56,457 [INFO] signal_generator — Checking SMC for USD/CHF (BUY)
+2026-03-11 18:54:59,346 [INFO] signal_generator — Checking SMC for NZD/USD (SELL)
+2026-03-11 18:55:02,004 [INFO] signal_generator — Checking SMC for USD/CAD (BUY)
+2026-03-11 18:55:04,938 [INFO] signal_generator — Checking SMC for AUD/USD (SELL)
+2026-03-11 18:55:07,682 [INFO] signal_generator — Checking SMC for USD/JPY (BUY)
+2026-03-11 18:55:10,402 [INFO] signal_generator — Checking SMC for GBP/USD (SELL)
+2026-03-11 18:55:13,169 [INFO] tracker — Signal saved to DB: #7 BUY USD/CHF @ 0.77865
+2026-03-11 18:55:13,195 [INFO] tracker — Signal saved to DB: #8 SELL NZD/USD @ 0.59411
+2026-03-11 18:55:13,202 [INFO] tracker — Signal saved to DB: #9 BUY USD/CAD @ 1.35732
+2026-03-11 18:55:13,211 [INFO] tracker — Signal saved to DB: #10 BUY USD/JPY @ 158.17599
+2026-03-11 18:55:13,219 [INFO] tracker — Signal saved to DB: #11 SELL GBP/USD @ 1.34441
+2026-03-11 18:55:15,782 [INFO] telegram_bot — Telegram message sent OK
+2026-03-11 18:55:15,784 [INFO] main — Daily brief sent to Telegram ✅
+2026-03-11 18:55:15,785 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-11 19:00:07,595 [INFO] __main__ — Scheduler stopped by user.
+2026-03-11 19:41:21,317 [INFO] __main__ — ==================================================
+2026-03-11 19:41:21,317 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-11 19:41:21,318 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-11 19:41:21,318 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-11 19:41:21,318 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-11 19:41:21,318 [INFO] __main__ — ==================================================
+2026-03-11 19:41:21,318 [INFO] __main__ — Running initial brief on startup...
+2026-03-11 19:41:21,318 [INFO] main — ==================================================
+2026-03-11 19:41:21,319 [INFO] main — DAILY BRIEF STARTING
+2026-03-11 19:41:21,319 [INFO] main — ==================================================
+2026-03-11 19:41:22,483 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-11 19:41:23,036 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-11 19:41:24,461 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-11 19:41:25,057 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-11 19:41:26,756 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-11 19:41:28,223 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-11 19:41:29,869 [INFO] data_collector — ForexFactory → 6 HIGH/MEDIUM events
+2026-03-11 19:41:29,871 [INFO] main — Data collected: 24 headlines, 6 events
+2026-03-11 19:41:37,059 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-11 19:41:37,068 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-11 19:41:37,068 [INFO] main — Analysis OK — Mood: risk-off | Confidence: 70%
+2026-03-11 19:41:37,068 [INFO] signal_generator — Checking SMC for USD/CHF (BUY)
+2026-03-11 19:41:39,833 [INFO] signal_generator — Checking SMC for NZD/USD (SELL)
+2026-03-11 19:41:42,305 [INFO] signal_generator — Checking SMC for USD/CAD (BUY)
+2026-03-11 19:41:45,019 [INFO] signal_generator — Checking SMC for AUD/USD (SELL)
+2026-03-11 19:41:47,605 [INFO] signal_generator — Checking SMC for USD/JPY (BUY)
+2026-03-11 19:41:50,436 [INFO] signal_generator — Checking SMC for GBP/USD (SELL)
+2026-03-11 19:41:54,519 [INFO] tracker — Signal saved to DB: #12 BUY USD/CHF @ 0.77865
+2026-03-11 19:41:54,527 [INFO] tracker — Signal saved to DB: #13 SELL NZD/USD @ 0.59411
+2026-03-11 19:41:54,535 [INFO] tracker — Signal saved to DB: #14 BUY USD/CAD @ 1.35732
+2026-03-11 19:41:54,544 [INFO] tracker — Signal saved to DB: #15 BUY USD/JPY @ 158.17599
+2026-03-11 19:41:54,553 [INFO] tracker — Signal saved to DB: #16 SELL GBP/USD @ 1.34441
+2026-03-11 19:41:58,314 [INFO] telegram_bot — Telegram message sent OK
+2026-03-11 19:41:58,316 [INFO] main — Daily brief sent to Telegram ✅
+2026-03-11 19:41:58,316 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-11 19:42:24,148 [INFO] __main__ — Scheduler stopped by user.
+2026-03-20 08:41:27,733 [INFO] __main__ — ==================================================
+2026-03-20 08:41:27,733 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-20 08:41:27,733 [INFO] __main__ — Mode: Hourly cumulative news update
+2026-03-20 08:41:27,733 [INFO] __main__ — ==================================================
+2026-03-20 08:41:27,733 [INFO] __main__ — Running first update on startup...
+2026-03-20 08:41:27,734 [INFO] main — ==================================================
+2026-03-20 08:41:27,734 [INFO] main — HOURLY UPDATE STARTING
+2026-03-20 08:41:27,734 [INFO] main — ==================================================
+2026-03-20 08:41:28,286 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-20 08:41:28,387 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-20 08:41:30,449 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-20 08:41:30,893 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-20 08:41:32,286 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-20 08:41:38,216 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-20 08:41:39,189 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
+2026-03-20 08:41:39,190 [INFO] main — Data: 24 headlines | 3 events | 3 high-impact
+2026-03-20 08:41:45,557 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:41:45,563 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:41:47,195 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:41:47,196 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:41:51,188 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:41:51,189 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:41:54,260 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:41:54,261 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:41:54,262 [INFO] main — Scores adjusted. 3 news items impacted scores.
+2026-03-20 08:41:55,796 [INFO] telegram_bot — Telegram message sent OK
+2026-03-20 08:41:55,798 [INFO] main — Hourly update sent ✅
+2026-03-20 08:41:55,798 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-20 08:48:42,280 [INFO] __main__ — ==================================================
+2026-03-20 08:48:42,280 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-20 08:48:42,280 [INFO] __main__ — Mode: Hourly cumulative news update
+2026-03-20 08:48:42,280 [INFO] __main__ — ==================================================
+2026-03-20 08:48:42,280 [INFO] __main__ — Running first update on startup...
+2026-03-20 08:48:42,280 [INFO] main — ==================================================
+2026-03-20 08:48:42,280 [INFO] main — HOURLY UPDATE STARTING
+2026-03-20 08:48:42,280 [INFO] main — ==================================================
+2026-03-20 08:48:42,281 [INFO] score_store — Score file not found — starting fresh.
+2026-03-20 08:48:42,842 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-20 08:48:42,956 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-20 08:48:44,519 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-20 08:48:44,916 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-20 08:48:47,079 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-20 08:48:53,159 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-20 08:48:53,795 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
+2026-03-20 08:48:53,798 [INFO] main — Fetched: 24 headlines | 3 high-impact
+2026-03-20 08:48:53,801 [INFO] main — New headlines this hour: 3
+2026-03-20 08:48:56,945 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:48:56,950 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:48:56,950 [INFO] main — Score updated: WTO cuts global trade outlook, says Middle East co → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'EUR': {'direction': 'NEGATIVE', 'delta': -0.5}}
+2026-03-20 08:49:00,185 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:49:00,186 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:49:00,187 [INFO] main — Score updated: investingLive Americas market news wrap: Big marke → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'EUR': {'direction': 'NEGATIVE', 'delta': -0.5}}
+2026-03-20 08:49:03,517 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
+2026-03-20 08:49:03,518 [INFO] analyzer — AI analysis OK (attempt 1)
+2026-03-20 08:49:03,518 [INFO] main — Score updated: Australian Dollar weakens as Australian Unemployme → {'AUD': {'direction': 'NEGATIVE', 'delta': -0.5}, 'USD': {'direction': 'POSITIVE', 'delta': 0.5}}
+2026-03-20 08:49:05,508 [INFO] telegram_bot — Telegram message sent OK
+2026-03-20 08:49:05,510 [INFO] main — Hourly update sent ✅
+2026-03-20 08:49:05,511 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
+2026-03-20 08:55:41,262 [INFO] __main__ — ==================================================
+2026-03-20 08:55:41,262 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-20 08:55:41,262 [INFO] __main__ — Mode: Hourly cumulative news update
+2026-03-20 08:55:41,262 [INFO] __main__ — ==================================================
+2026-03-20 08:55:41,263 [INFO] __main__ — Running first update on startup...
+2026-03-20 08:55:41,263 [INFO] main — ==================================================
+2026-03-20 08:55:41,263 [INFO] main — HOURLY UPDATE STARTING
+2026-03-20 08:55:41,263 [INFO] main — ==================================================
+2026-03-20 08:55:41,666 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss -> 6 headlines
+2026-03-20 08:55:41,714 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews -> 0 headlines
+2026-03-20 08:55:44,739 [INFO] data_collector — RSS https://www.forexlive.com/feed/news -> 6 headlines
+2026-03-20 08:55:45,165 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news -> 6 headlines
+2026-03-20 08:55:48,224 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ -> 6 headlines
+2026-03-20 08:55:54,922 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news -> 0 headlines
+2026-03-20 08:55:55,590 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
+2026-03-20 08:55:55,591 [INFO] main — Fetched: 24 headlines | 3 high-impact
+2026-03-20 08:55:55,604 [INFO] main — New headlines this hour: 0
+2026-03-20 08:55:56,900 [INFO] telegram_bot — Telegram message sent OK
+2026-03-20 08:55:56,902 [INFO] main — Hourly update sent ✅
+2026-03-20 08:55:56,902 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
