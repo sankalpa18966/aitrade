@@ -271,92 +271,21 @@ AttributeError: module 'analyzer' has no attribute '_call_llm'
 2026-03-20 08:55:56,900 [INFO] telegram_bot — Telegram message sent OK
 2026-03-20 08:55:56,902 [INFO] main — Hourly update sent ✅
 2026-03-20 08:55:56,902 [INFO] __main__ — Entering main loop... (Ctrl+C to stop)
-2026-03-20 09:30:05,549 [INFO] __main__ — 💓 Keep-alive | 04:00 UTC
-2026-03-20 09:30:26,928 [INFO] __main__ — 💓 Keep-alive | 04:00 UTC
-2026-03-20 09:49:05,564 [INFO] __main__ — ⏰ Scheduled: Hourly Update
-2026-03-20 09:49:05,565 [INFO] main — ==================================================
-2026-03-20 09:49:05,565 [INFO] main — HOURLY UPDATE STARTING
-2026-03-20 09:49:05,565 [INFO] main — ==================================================
-2026-03-20 09:49:05,566 [INFO] score_store — Score file not found — starting fresh.
-2026-03-20 09:49:06,363 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
-2026-03-20 09:49:06,714 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
-2026-03-20 09:49:09,790 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
-2026-03-20 09:49:10,315 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
-2026-03-20 09:49:11,846 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
-2026-03-20 09:49:17,687 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
-2026-03-20 09:49:18,575 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
-2026-03-20 09:49:18,577 [INFO] main — Fetched: 24 headlines | 4 high-impact
-2026-03-20 09:49:18,588 [INFO] main — New headlines this hour: 4
-2026-03-20 09:49:21,411 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 09:49:21,412 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 09:49:21,412 [INFO] main — Score updated: investingLive Asia-Pacific FX news wrap: Gold boun → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}}
-2026-03-20 09:49:24,228 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 09:49:24,229 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 09:49:24,230 [INFO] main — Score updated: WTO cuts global trade outlook, says Middle East co → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'EUR': {'direction': 'NEGATIVE', 'delta': -0.5}}
-2026-03-20 09:49:26,648 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 09:49:26,649 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 09:49:26,649 [INFO] main — Score updated: investingLive Americas market news wrap: Big marke → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'EUR': {'direction': 'NEGATIVE', 'delta': -0.5}}
-2026-03-20 09:49:30,484 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 09:49:30,486 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 09:49:30,486 [INFO] main — Score updated: Australian Dollar weakens as Australian Unemployme → {'AUD': {'direction': 'NEGATIVE', 'delta': -0.5}, 'USD': {'direction': 'POSITIVE', 'delta': 0.5}}
-2026-03-20 09:49:31,955 [INFO] telegram_bot — Telegram message sent OK
-2026-03-20 09:49:31,957 [INFO] main — Hourly update sent ✅
-2026-03-20 09:55:56,949 [INFO] __main__ — ⏰ Scheduled: Hourly Update
-2026-03-20 09:55:56,950 [INFO] main — ==================================================
-2026-03-20 09:55:56,950 [INFO] main — HOURLY UPDATE STARTING
-2026-03-20 09:55:56,950 [INFO] main — ==================================================
-2026-03-20 09:55:57,398 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss -> 6 headlines
-2026-03-20 09:55:57,585 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews -> 0 headlines
-2026-03-20 09:55:59,177 [INFO] data_collector — RSS https://www.forexlive.com/feed/news -> 6 headlines
-2026-03-20 09:55:59,757 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news -> 6 headlines
-2026-03-20 09:56:01,666 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ -> 6 headlines
-2026-03-20 09:56:07,783 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news -> 0 headlines
-2026-03-20 09:56:08,862 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
-2026-03-20 09:56:08,863 [INFO] main — Fetched: 24 headlines | 5 high-impact
-2026-03-20 09:56:08,876 [INFO] main — New headlines this hour: 1
-2026-03-20 09:56:12,548 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 09:56:12,553 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 09:56:12,553 [INFO] main — Score updated: Goldman Sachs expects prolonged BoE pause, sees ne → {'GBP': {'direction': 'NEGATIVE', 'delta': -0.5}, 'USD': {'direction': 'POSITIVE', 'delta': 0.5}}
-2026-03-20 09:56:14,186 [INFO] telegram_bot — Telegram message sent OK
-2026-03-20 09:56:14,187 [INFO] main — Hourly update sent ✅
-2026-03-20 10:30:01,986 [INFO] __main__ — 💓 Keep-alive | 05:00 UTC
-2026-03-20 10:30:14,210 [INFO] __main__ — 💓 Keep-alive | 05:00 UTC
-2026-03-20 10:49:32,002 [INFO] __main__ — ⏰ Scheduled: Hourly Update
-2026-03-20 10:49:32,002 [INFO] main — ==================================================
-2026-03-20 10:49:32,002 [INFO] main — HOURLY UPDATE STARTING
-2026-03-20 10:49:32,002 [INFO] main — ==================================================
-2026-03-20 10:49:32,518 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
-2026-03-20 10:49:32,645 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
-2026-03-20 10:49:34,337 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
-2026-03-20 10:49:35,285 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
-2026-03-20 10:49:37,474 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
-2026-03-20 10:49:42,625 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
-2026-03-20 10:49:43,684 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
-2026-03-20 10:49:43,685 [INFO] main — Fetched: 24 headlines | 6 high-impact
-2026-03-20 10:49:43,697 [INFO] main — New headlines this hour: 3
-2026-03-20 10:49:47,801 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 10:49:47,801 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 10:49:47,802 [INFO] main — Score updated: Analysis-Iran conflict could flip China’s deflatio → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}}
-2026-03-20 10:49:49,353 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 10:49:49,354 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 10:49:49,354 [INFO] main — Score updated: US Dollar gains momentum to near 99.50 amid Fed ha → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'EUR': {'direction': 'NEGATIVE', 'delta': -0.5}}
-2026-03-20 10:49:52,204 [INFO] httpx — HTTP Request: POST https://models.inference.ai.azure.com/chat/completions "HTTP/1.1 200 OK"
-2026-03-20 10:49:52,204 [INFO] analyzer — AI analysis OK (attempt 1)
-2026-03-20 10:49:52,204 [INFO] main — Score updated: USD/JPY Price Forecast: 20-day EMA acts as key sup → {'USD': {'direction': 'POSITIVE', 'delta': 0.5}, 'JPY': {'direction': 'NEGATIVE', 'delta': -0.5}}
-2026-03-20 10:49:54,155 [INFO] telegram_bot — Telegram message sent OK
-2026-03-20 10:49:54,157 [INFO] main — Hourly update sent ✅
-2026-03-20 10:56:14,230 [INFO] __main__ — ⏰ Scheduled: Hourly Update
-2026-03-20 10:56:14,230 [INFO] main — ==================================================
-2026-03-20 10:56:14,230 [INFO] main — HOURLY UPDATE STARTING
-2026-03-20 10:56:14,230 [INFO] main — ==================================================
-2026-03-20 10:56:14,990 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss -> 6 headlines
-2026-03-20 10:56:15,061 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews -> 0 headlines
-2026-03-20 10:56:17,128 [INFO] data_collector — RSS https://www.forexlive.com/feed/news -> 6 headlines
-2026-03-20 10:56:18,114 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news -> 6 headlines
-2026-03-20 10:56:20,570 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ -> 6 headlines
-2026-03-20 10:56:28,014 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news -> 0 headlines
-2026-03-20 10:56:29,050 [INFO] data_collector — ForexFactory → 3 HIGH/MEDIUM events
-2026-03-20 10:56:29,052 [INFO] main — Fetched: 24 headlines | 6 high-impact
-2026-03-20 10:56:29,065 [INFO] main — New headlines this hour: 0
-2026-03-20 10:56:30,948 [INFO] telegram_bot — Telegram message sent OK
-2026-03-20 10:56:30,949 [INFO] main — Hourly update sent ✅
+2026-03-26 19:08:47,718 [INFO] __main__ — ==================================================
+2026-03-26 19:08:47,719 [INFO] __main__ — FOREX AI SCHEDULER STARTED
+2026-03-26 19:08:47,719 [INFO] __main__ — Morning Brief : 00:30 UTC daily
+2026-03-26 19:08:47,719 [INFO] __main__ — Evening Summary: 12:30 UTC daily
+2026-03-26 19:08:47,719 [INFO] __main__ — News Check    : Every 30 minutes
+2026-03-26 19:08:47,719 [INFO] __main__ — ==================================================
+2026-03-26 19:08:47,719 [INFO] __main__ — Running initial brief on startup...
+2026-03-26 19:08:47,719 [INFO] main — ==================================================
+2026-03-26 19:08:47,719 [INFO] main — DAILY BRIEF STARTING
+2026-03-26 19:08:47,719 [INFO] main — ==================================================
+2026-03-26 19:08:48,471 [INFO] data_collector — RSS https://www.investing.com/rss/news.rss → 6 headlines
+2026-03-26 19:08:48,654 [INFO] data_collector — RSS https://feeds.reuters.com/reuters/businessNews → 0 headlines
+2026-03-26 19:08:51,152 [INFO] data_collector — RSS https://www.forexlive.com/feed/news → 6 headlines
+2026-03-26 19:08:51,835 [INFO] data_collector — RSS https://www.fxstreet.com/rss/news → 6 headlines
+2026-03-26 19:08:53,836 [INFO] data_collector — RSS https://feeds.marketwatch.com/marketwatch/topstories/ → 6 headlines
+2026-03-26 19:08:57,914 [INFO] data_collector — RSS https://www.dailyfx.com/feeds/forex-market-news → 0 headlines
+2026-03-26 19:08:58,850 [INFO] data_collector — ForexFactory → 4 HIGH/MEDIUM events
+2026-03-26 19:08:58,852 [INFO] main — Data collected: 24 headlines, 4 events
