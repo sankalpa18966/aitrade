@@ -1,0 +1,128 @@
+{
+  "scores": {
+    "USD": 4.0,
+    "EUR": -1.5,
+    "GBP": -0.5,
+    "JPY": -0.5,
+    "AUD": -0.5,
+    "CAD": 0.0,
+    "NZD": 0.0,
+    "CHF": 0.0
+  },
+  "last_reset": "2026-03-20",
+  "updated_at": "2026-03-20T05:26:29.065437+00:00",
+  "news_log": [
+    {
+      "time": "05:19 UTC",
+      "title": "USD/JPY Price Forecast: 20-day EMA acts as key support zone around 157.50",
+      "one_liner": "USD strengthens as it finds support near 157.50, while JPY underperforms.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        },
+        "JPY": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        }
+      }
+    },
+    {
+      "time": "05:19 UTC",
+      "title": "US Dollar gains momentum to near 99.50 amid Fed hawkish hold, Middle East tensio",
+      "one_liner": "US Dollar strengthens amid Fed's hawkish stance and geopolitical tensions.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        },
+        "EUR": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        }
+      }
+    },
+    {
+      "time": "05:19 UTC",
+      "title": "Analysis-Iran conflict could flip China’s deflation into ’bad inflation’",
+      "one_liner": "Iran conflict may lead to inflationary pressures in China, strengthening the USD.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        }
+      }
+    },
+    {
+      "time": "04:26 UTC",
+      "title": "Goldman Sachs expects prolonged BoE pause, sees next rate cut in 2027",
+      "one_liner": "Goldman Sachs' forecast of a prolonged BoE pause negatively impacts GBP while supporting USD.",
+      "changes": {
+        "GBP": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        },
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        }
+      }
+    },
+    {
+      "time": "04:19 UTC",
+      "title": "Australian Dollar weakens as Australian Unemployment Rate rises, PBOC holds rate",
+      "one_liner": "Rising unemployment in Australia weakens AUD, benefiting USD.",
+      "changes": {
+        "AUD": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        },
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        }
+      }
+    },
+    {
+      "time": "04:19 UTC",
+      "title": "investingLive Americas market news wrap: Big market moves in oil, gold and FX",
+      "one_liner": "Strong US jobs data boosts USD, pressures EUR.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        },
+        "EUR": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        }
+      }
+    },
+    {
+      "time": "04:19 UTC",
+      "title": "WTO cuts global trade outlook, says Middle East conflict lifts energy risks",
+      "one_liner": "WTO cuts trade outlook, boosting USD while pressuring EUR due to increased energy risks.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        },
+        "EUR": {
+          "direction": "NEGATIVE",
+          "delta": -0.5
+        }
+      }
+    },
+    {
+      "time": "04:19 UTC",
+      "title": "investingLive Asia-Pacific FX news wrap: Gold bounced back above $4730",
+      "one_liner": "Gold's rebound supports USD, while GBP remains unaffected by BoE's stance.",
+      "changes": {
+        "USD": {
+          "direction": "POSITIVE",
+          "delta": 0.5
+        }
+      }
+    }
+  ]
+}
